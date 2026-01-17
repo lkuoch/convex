@@ -1,0 +1,18 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["typescript", "oxc"],
+  "ignorePatterns": [
+    "dist",
+    "node_modules",
+    "apps/*/dist",
+    "packages/*/dist",
+    "apps/web/public",
+    "apps/backend/convex/_generated",
+    "postcss.config.js",
+    "tailwind.config.js",
+    "apps/*/vite.config.ts"
+  ],
+  "rules": {
+    "no-unused-vars": "warn"
+  }
+}

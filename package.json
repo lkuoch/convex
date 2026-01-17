@@ -1,33 +1,28 @@
 {
+  "devDependencies": {
+    "@convex-dev/eslint-plugin": "1.1.1",
+    "@vitejs/plugin-react": "5.1.2",
+    "bun-tasks": "^0.1.2",
+    "oxlint": "1.39.0",
+    "typescript": "5.9.3",
+    "vite": "7.3.1"
+  },
   "name": "law",
   "private": true,
-  "version": "0.0.0",
+  "scripts": {
+    "build": "bun run --filter '*' build",
+    "clean": "rm -rf node_modules apps/*/node_modules packages/*/node_modules",
+    "dev": "bun-tasks dev:web ::: dev:backend",
+    "dev:backend": "cd apps/backend && bun run dev",
+    "dev:web": "cd apps/web && bun run dev",
+    "lint": "oxlint -c oxlint.json --react-plugin --import-plugin",
+    "lint:format": "oxlint -c oxlint.json --fix --react-plugin --import-plugin",
+    "lint:types": "bun run --filter '*' lint"
+  },
   "type": "module",
+  "version": "0.0.0",
   "workspaces": [
     "apps/*",
     "packages/*"
-  ],
-  "scripts": {
-    "dev": "npm-run-all --parallel dev:web dev:backend",
-    "dev:web": "cd apps/web && bun run dev",
-    "dev:backend": "cd apps/backend && bun run dev",
-    "build": "bun run --filter '*' build",
-    "lint": "eslint apps packages --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "lint:types": "bun run --filter '*' lint",
-    "clean": "rm -rf node_modules apps/*/node_modules packages/*/node_modules"
-  },
-  "devDependencies": {
-    "@convex-dev/eslint-plugin": "^1.1.1",
-    "@eslint/js": "^9.39.1",
-    "@vitejs/plugin-react": "^5.1.2",
-    "eslint": "^9.39.1",
-    "eslint-plugin-react-hooks": "^7.0.1",
-    "eslint-plugin-react-refresh": "^0.4.24",
-    "globals": "^17.0.0",
-    "npm-run-all2": "^8.0.4",
-    "prettier": "^3.6.2",
-    "typescript": "~5.9.3",
-    "typescript-eslint": "^8.47.0",
-    "vite": "^7.2.7"
-  }
+  ]
 }
