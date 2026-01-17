@@ -26,6 +26,17 @@ import {
   Info,
   Book,
   Play,
+  BrainCircuit,
+  Database,
+  FileCode,
+  FileSearch,
+  Scale,
+  Gavel,
+  ScrollText,
+  FolderOpen,
+  Tag,
+  Sparkles,
+  Zap,
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -589,6 +600,236 @@ export function DashboardPage() {
               </CardContent>
             </Card>
           </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <Card>
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <CardTitle>AI Models</CardTitle>
+                    <CardDescription>
+                      Available machine learning models
+                    </CardDescription>
+                  </div>
+                  <Button variant="outline" size="icon">
+                    <MoreHorizontal className="size-4" />
+                  </Button>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  {[
+                    {
+                      name: "Legal Document Analyzer",
+                      type: "NLP",
+                      status: "Active",
+                      accuracy: "98.5%",
+                      usage: "24.5k calls",
+                      icon: <BrainCircuit className="size-4" />,
+                      description: "Analyzes legal documents for key terms and clauses"
+                    },
+                    {
+                      name: "Contract Review AI",
+                      type: "Classification",
+                      status: "Active",
+                      accuracy: "96.2%",
+                      usage: "18.2k calls",
+                      icon: <Scale className="size-4" />,
+                      description: "Automates contract review and risk assessment"
+                    },
+                    {
+                      name: "Case Prediction Model",
+                      type: "ML",
+                      status: "Training",
+                      accuracy: "92.8%",
+                      usage: "8.1k calls",
+                      icon: <Gavel className="size-4" />,
+                      description: "Predicts case outcomes based on historical data"
+                    },
+                    {
+                      name: "Entity Extraction",
+                      type: "NLP",
+                      status: "Active",
+                      accuracy: "99.1%",
+                      usage: "42.3k calls",
+                      icon: <Sparkles className="size-4" />,
+                      description: "Extracts entities like names, dates, locations"
+                    },
+                    {
+                      name: "Sentiment Analyzer",
+                      type: "NLP",
+                      status: "Active",
+                      accuracy: "94.7%",
+                      usage: "15.7k calls",
+                      icon: <Zap className="size-4" />,
+                      description: "Analyzes sentiment in legal communications"
+                    },
+                  ].map((model, index) => (
+                    <div key={`model-${index}`} className="flex items-start gap-3 p-3 rounded-lg border hover:bg-muted/50 transition-colors">
+                      <div className="flex items-center justify-center size-10 rounded-lg bg-primary/10 text-primary">
+                        {model.icon}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-1">
+                          <p className="text-sm font-medium truncate">{model.name}</p>
+                          <Badge variant={model.status === "Active" ? "default" : "secondary"} className="text-xs">
+                            {model.status}
+                          </Badge>
+                        </div>
+                        <p className="text-xs text-muted-foreground mb-2">{model.description}</p>
+                        <div className="flex items-center gap-3 text-xs">
+                          <span className="text-muted-foreground">{model.type}</span>
+                          <span className="text-muted-foreground">•</span>
+                          <span className="text-green-600 font-medium">{model.accuracy}</span>
+                          <span className="text-muted-foreground">•</span>
+                          <span className="text-muted-foreground">{model.usage}</span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+              <CardFooter>
+                <Button variant="outline" className="w-full">
+                  <Database className="mr-2 size-4" />
+                  View All Models
+                </Button>
+              </CardFooter>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <CardTitle>Recent Documents</CardTitle>
+                    <CardDescription>
+                      Latest legal documents and case files
+                    </CardDescription>
+                  </div>
+                  <Button variant="outline" size="icon">
+                    <MoreHorizontal className="size-4" />
+                  </Button>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  {[
+                    {
+                      name: "Smith v. Johnson - Contract",
+                      type: "Contract",
+                      size: "2.4 MB",
+                      modified: "2 hours ago",
+                      status: "Review",
+                      icon: <FileText className="size-4" />,
+                      tags: ["urgent", "contract"]
+                    },
+                    {
+                      name: "Estate Planning - Williams",
+                      type: "Will",
+                      size: "1.8 MB",
+                      modified: "5 hours ago",
+                      status: "Draft",
+                      icon: <ScrollText className="size-4" />,
+                      tags: ["estate", "draft"]
+                    },
+                    {
+                      name: "Merger Agreement Q4",
+                      type: "Agreement",
+                      size: "4.2 MB",
+                      modified: "1 day ago",
+                      status: "Final",
+                      icon: <FileCode className="size-4" />,
+                      tags: ["merger", "corporate"]
+                    },
+                    {
+                      name: "Deposition Transcript #47",
+                      type: "Transcript",
+                      size: "8.7 MB",
+                      modified: "2 days ago",
+                      status: "Archived",
+                      icon: <FileSearch className="size-4" />,
+                      tags: ["deposition", "transcript"]
+                    },
+                    {
+                      name: "Patent Application #2847",
+                      type: "Patent",
+                      size: "3.1 MB",
+                      modified: "3 days ago",
+                      status: "Pending",
+                      icon: <FolderOpen className="size-4" />,
+                      tags: ["patent", "ip"]
+                    },
+                  ].map((doc, index) => (
+                    <div key={`doc-${index}`} className="flex items-start gap-3 p-3 rounded-lg border hover:bg-muted/50 transition-colors">
+                      <div className="flex items-center justify-center size-10 rounded-lg bg-primary/10 text-primary">
+                        {doc.icon}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-1">
+                          <p className="text-sm font-medium truncate">{doc.name}</p>
+                          <Badge variant="outline" className="text-xs">{doc.status}</Badge>
+                        </div>
+                        <p className="text-xs text-muted-foreground mb-2">{doc.type} • {doc.size}</p>
+                        <div className="flex items-center gap-2 flex-wrap">
+                          {doc.tags.map((tag, tagIndex) => (
+                            <Badge key={`tag-${tagIndex}`} variant="secondary" className="text-xs">
+                              <Tag className="mr-1 size-3" />
+                              {tag}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="text-xs text-muted-foreground whitespace-nowrap ml-2">
+                        {doc.modified}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+              <CardFooter>
+                <Button variant="outline" className="w-full">
+                  <FolderOpen className="mr-2 size-4" />
+                  Browse All Documents
+                </Button>
+              </CardFooter>
+            </Card>
+          </div>
+
+          <Card>
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <div>
+                  <CardTitle>Document Categories</CardTitle>
+                  <CardDescription>
+                    Overview of your legal document collection
+                  </CardDescription>
+                </div>
+                <Button variant="outline" size="icon">
+                  <MoreHorizontal className="size-4" />
+                </Button>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                {[
+                  { name: "Contracts", count: 234, icon: <FileText className="size-4" />, color: "bg-blue-500" },
+                  { name: "Court Filings", count: 89, icon: <Gavel className="size-4" />, color: "bg-red-500" },
+                  { name: "Briefs", count: 156, icon: <ScrollText className="size-4" />, color: "bg-purple-500" },
+                  { name: "Wills & Trusts", count: 67, icon: <FileSearch className="size-4" />, color: "bg-green-500" },
+                  { name: "Corporate", count: 128, icon: <FileCode className="size-4" />, color: "bg-orange-500" },
+                  { name: "Patents", count: 45, icon: <Database className="size-4" />, color: "bg-cyan-500" },
+                ].map((category, index) => (
+                  <div key={`category-${index}`} className="flex flex-col items-center p-4 rounded-lg border hover:bg-muted/50 transition-colors cursor-pointer">
+                    <div className={`size-12 rounded-full ${category.color} flex items-center justify-center mb-2`}>
+                      <div className="text-white">{category.icon}</div>
+                    </div>
+                    <div className="text-lg font-bold">{category.count}</div>
+                    <div className="text-xs text-muted-foreground text-center">{category.name}</div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
 
           <Card>
             <CardHeader>
