@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "lib": ["ES2021", "dom"],
+    "forceConsistentCasingInFileNames": true,
+    "module": "ESNext",
+    "isolatedModules": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "moduleResolution": "Bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "paths": {
+      "@law/common": ["../../packages/common/src"]
+    }
+  },
+  "include": ["./**/*"],
+  "exclude": ["./_generated"],
+  "references": [{ "path": "../../packages/common" }]
+}

@@ -30,3 +30,6 @@ bun.lockb
 *.njsproj
 *.sln
 *.sw?
+
+# opensrc - source code for packages
+opensrc/

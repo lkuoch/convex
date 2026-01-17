@@ -1,8 +1,17 @@
 {
   "files": [],
   "references": [
-    { "path": "./apps/web" },
-    { "path": "./apps/backend" },
-    { "path": "./packages/common" }
+    {
+      "path": "./apps/web"
+    },
+    {
+      "path": "./apps/backend"
+    },
+    {
+      "path": "./packages/common"
+    }
+  ],
+  "exclude": [
+    "opensrc"
   ]
 }
