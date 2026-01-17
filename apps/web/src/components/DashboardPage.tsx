@@ -13,6 +13,19 @@ import {
   FileText,
   Calendar,
   Settings,
+  AlertTriangle,
+  Clock,
+  Globe,
+  HelpCircle,
+  Mail,
+  RefreshCw,
+  Activity,
+  MoreHorizontal,
+  ChevronRight,
+  Upload,
+  Info,
+  Book,
+  Play,
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -123,7 +136,7 @@ export function DashboardPage() {
                     { category: "Product C", revenue: 18000, percentage: 18 },
                     { category: "Product D", revenue: 5000, percentage: 5 },
                   ].map((item) => (
-                    <div key={item.category}>
+                    <div key={`revenue-${item.category}`}>
                       <div className="flex items-center justify-between text-sm mb-2">
                         <span className="font-medium">{item.category}</span>
                         <span className="text-muted-foreground">${item.revenue.toLocaleString()}</span>
@@ -309,6 +322,300 @@ export function DashboardPage() {
               </CardContent>
             </Card>
           </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <Card className="col-span-2">
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <CardTitle>Activity Feed</CardTitle>
+                    <CardDescription>
+                      Recent updates and notifications
+                    </CardDescription>
+                  </div>
+                  <Button variant="outline" size="icon">
+                    <RefreshCw className="size-4" />
+                    <span className="sr-only">Refresh</span>
+                  </Button>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {[
+                    {
+                      user: "John Doe",
+                      action: "uploaded a new document",
+                      detail: "Q4 Financial Report.pdf",
+                      time: "2 minutes ago",
+                      icon: <Upload className="size-4" />,
+                    },
+                    {
+                      user: "Sarah Miller",
+                      action: "completed task",
+                      detail: "Review client contracts",
+                      time: "15 minutes ago",
+                      icon: <CheckCircle2 className="size-4 text-green-600" />,
+                    },
+                    {
+                      user: "Mike Johnson",
+                      action: "commented on",
+                      detail: "Project Alpha discussion",
+                      time: "1 hour ago",
+                      icon: <Mail className="size-4 text-blue-600" />,
+                    },
+                    {
+                      user: "Emily Chen",
+                      action: "updated",
+                      detail: "Dashboard metrics",
+                      time: "2 hours ago",
+                      icon: <Activity className="size-4 text-purple-600" />,
+                    },
+                    {
+                      user: "Alex Turner",
+                      action: "created",
+                      detail: "New team workspace",
+                      time: "3 hours ago",
+                      icon: <Plus className="size-4 text-orange-600" />,
+                    },
+                  ].map((activity, index) => (
+                    <div key={`activity-${index}`} className="flex items-start gap-3">
+                      <Avatar className="size-8">
+                        <AvatarFallback className="text-xs">
+                          {activity.user.split(" ").map(n => n[0]).join("")}
+                        </AvatarFallback>
+                      </Avatar>
+                      <div className="flex-1 space-y-1">
+                        <p className="text-sm">
+                          <span className="font-medium">{activity.user}</span> {activity.action}
+                        </p>
+                        <p className="text-sm text-muted-foreground">{activity.detail}</p>
+                      </div>
+                      <div className="text-xs text-muted-foreground flex items-center gap-1">
+                        <Clock className="size-3" />
+                        {activity.time}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+              <CardFooter>
+                <Button variant="outline" className="w-full">
+                  View All Activity
+                </Button>
+              </CardFooter>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Upcoming Tasks</CardTitle>
+                <CardDescription>
+                  Tasks due this week
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  {[
+                    { task: "Review quarterly report", priority: "High", due: "Today", color: "bg-red-500" },
+                    { task: "Team standup meeting", priority: "Medium", due: "Tomorrow", color: "bg-yellow-500" },
+                    { task: "Client presentation prep", priority: "High", due: "Wed", color: "bg-red-500" },
+                    { task: "Code review session", priority: "Low", due: "Thu", color: "bg-green-500" },
+                    { task: "Sprint planning", priority: "Medium", due: "Fri", color: "bg-yellow-500" },
+                  ].map((item, index) => (
+                    <div key={`task-${index}`} className="flex items-center gap-3 p-3 rounded-lg border">
+                      <div className={`size-2 rounded-full ${item.color}`} />
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium truncate">{item.task}</p>
+                        <p className="text-xs text-muted-foreground">{item.due}</p>
+                      </div>
+                      <Badge variant="outline" className="text-xs">{item.priority}</Badge>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+              <CardFooter>
+                <Button variant="outline" className="w-full">
+                  View All Tasks
+                </Button>
+              </CardFooter>
+            </Card>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+            <Card className="col-span-1">
+              <CardHeader>
+                <CardTitle>Performance</CardTitle>
+                <CardDescription>
+                  Key metrics this month
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {[
+                  { label: "Response Time", value: "1.2s", change: "+12%", trend: "up" },
+                  { label: "Uptime", value: "99.9%", change: "+0.1%", trend: "up" },
+                  { label: "Errors", value: "0.2%", change: "-15%", trend: "down" },
+                  { label: "Satisfaction", value: "4.8", change: "+0.3", trend: "up" },
+                ].map((metric, index) => (
+                  <div key={`metric-${index}`} className="space-y-1">
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-muted-foreground">{metric.label}</span>
+                      <span className="font-medium">{metric.value}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-xs">
+                      {metric.trend === "up" ? (
+                        <TrendingUp className="size-3 text-green-600" />
+                      ) : (
+                        <ArrowUpRight className="size-3 text-red-600 rotate-180" />
+                      )}
+                      <span className={metric.trend === "up" ? "text-green-600" : "text-red-600"}>
+                        {metric.change}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+
+            <Card className="col-span-3">
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <CardTitle>Team Members</CardTitle>
+                    <CardDescription>
+                      Active team members
+                    </CardDescription>
+                  </div>
+                  <Button variant="outline" size="icon">
+                    <MoreHorizontal className="size-4" />
+                  </Button>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {[
+                    { name: "John Doe", role: "Project Manager", status: "Online" },
+                    { name: "Sarah Miller", role: "Developer", status: "Online" },
+                    { name: "Mike Johnson", role: "Designer", status: "Away" },
+                    { name: "Emily Chen", role: "QA Engineer", status: "Online" },
+                    { name: "Alex Turner", role: "DevOps", status: "Offline" },
+                    { name: "Lisa Park", role: "Product Owner", status: "Online" },
+                  ].map((member, index) => (
+                    <div key={`member-${index}`} className="flex items-center gap-3 p-3 rounded-lg border">
+                      <Avatar>
+                        <AvatarFallback>
+                          {member.name.split(" ").map(n => n[0]).join("")}
+                        </AvatarFallback>
+                      </Avatar>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium truncate">{member.name}</p>
+                        <p className="text-xs text-muted-foreground">{member.role}</p>
+                      </div>
+                      <div className={`size-2 rounded-full ${
+                        member.status === "Online" ? "bg-green-500" :
+                        member.status === "Away" ? "bg-yellow-500" : "bg-gray-500"
+                      }`} />
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+              <CardFooter>
+                <Button variant="outline" className="w-full">
+                  Manage Team
+                </Button>
+              </CardFooter>
+            </Card>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <Card>
+              <CardHeader>
+                <CardTitle>Recent Alerts</CardTitle>
+                <CardDescription>
+                  System notifications and warnings
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  {[
+                    { type: "warning", message: "Storage usage approaching 90%", time: "2 hours ago" },
+                    { type: "error", message: "Database connection timeout", time: "5 hours ago" },
+                    { type: "info", message: "New feature deployment scheduled", time: "1 day ago" },
+                    { type: "success", message: "Backup completed successfully", time: "2 days ago" },
+                  ].map((alert, index) => (
+                    <div key={`alert-${index}`} className="flex items-start gap-3 p-3 rounded-lg border">
+                      {alert.type === "warning" && <AlertTriangle className="size-4 text-yellow-600" />}
+                      {alert.type === "error" && <AlertTriangle className="size-4 text-red-600" />}
+                      {alert.type === "info" && <Info className="size-4 text-blue-600" />}
+                      {alert.type === "success" && <CheckCircle2 className="size-4 text-green-600" />}
+                      <div className="flex-1">
+                        <p className="text-sm">{alert.message}</p>
+                        <p className="text-xs text-muted-foreground mt-1">{alert.time}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Help & Resources</CardTitle>
+                <CardDescription>
+                  Quick access to documentation and support
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  {[
+                    { title: "Getting Started Guide", icon: <Book className="size-4" />, description: "Learn the basics" },
+                    { title: "API Documentation", icon: <Globe className="size-4" />, description: "API reference" },
+                    { title: "Video Tutorials", icon: <Play className="size-4" />, description: "Watch and learn" },
+                    { title: "Contact Support", icon: <HelpCircle className="size-4" />, description: "Get help" },
+                    { title: "Community Forum", icon: <Users className="size-4" />, description: "Join discussion" },
+                  ].map((resource, index) => (
+                    <Button key={`resource-${index}`} variant="ghost" className="w-full justify-start h-auto py-3">
+                      <div className="flex items-center gap-3">
+                        <div className="flex items-center justify-center size-10 rounded-lg bg-muted">
+                          {resource.icon}
+                        </div>
+                        <div className="text-left">
+                          <p className="text-sm font-medium">{resource.title}</p>
+                          <p className="text-xs text-muted-foreground">{resource.description}</p>
+                        </div>
+                        <ChevronRight className="ml-auto size-4 text-muted-foreground" />
+                      </div>
+                    </Button>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Quick Stats</CardTitle>
+              <CardDescription>
+                Overview of your key performance indicators
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                {[
+                  { label: "Total Projects", value: "24", icon: <Package className="size-4" />, color: "bg-blue-500" },
+                  { label: "Completed Tasks", value: "156", icon: <CheckCircle2 className="size-4" />, color: "bg-green-500" },
+                  { label: "Pending Reviews", value: "12", icon: <Clock className="size-4" />, color: "bg-yellow-500" },
+                  { label: "Team Members", value: "18", icon: <Users className="size-4" />, color: "bg-purple-500" },
+                ].map((stat, index) => (
+                  <div key={`stat-${index}`} className="flex flex-col items-center text-center p-4 rounded-lg border">
+                    <div className={`size-10 rounded-full ${stat.color} flex items-center justify-center mb-2`}>
+                      <div className="text-white">{stat.icon}</div>
+                    </div>
+                    <div className="text-2xl font-bold">{stat.value}</div>
+                    <div className="text-sm text-muted-foreground">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
         </main>
       </div>
     </div>
