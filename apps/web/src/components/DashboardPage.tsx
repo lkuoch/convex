@@ -2,8 +2,6 @@ import {
   ArrowUpRight,
   Bell,
   CheckCircle2,
-  CircleDashed,
-  CreditCard,
   DollarSign,
   Package,
   Plus,
@@ -12,14 +10,9 @@ import {
   Users,
   FileText,
   Calendar,
-  Settings,
   AlertTriangle,
   Clock,
-  Globe,
-  HelpCircle,
-  Mail,
   RefreshCw,
-  Activity,
   MoreHorizontal,
   ChevronRight,
   Upload,
@@ -37,161 +30,367 @@ import {
   Tag,
   Sparkles,
   Zap,
+  Briefcase,
+  Star,
+  Timer,
+  MessageSquare,
+  CalendarCheck,
+  ClipboardList,
+  Award,
+  Lightbulb,
+  Receipt,
+  Globe2,
+  Filter,
+  SortAsc,
+  Eye,
+  Download,
+  Menu,
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
-import { Separator } from "@/components/ui/separator"
 
 export function DashboardPage() {
+  const currentHour = new Date().getHours();
+  const greeting = currentHour < 12 ? "Good morning" : currentHour < 18 ? "Good afternoon" : "Good evening";
+
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
       <div className="flex flex-col">
-        <header className="flex h-16 items-center gap-4 border-b px-6">
-          <h1 className="font-semibold text-xl">Dashboard</h1>
-          <div className="ml-auto flex items-center gap-2">
-            <Button variant="outline" size="icon">
-              <Search className="size-4" />
-              <span className="sr-only">Search</span>
-            </Button>
-            <Button variant="outline" size="icon">
-              <Bell className="size-4" />
-              <span className="sr-only">Notifications</span>
-            </Button>
-            <Avatar>
-              <AvatarFallback className="bg-primary text-primary-foreground">
-                JD
-              </AvatarFallback>
-            </Avatar>
+        <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+          <div className="flex h-16 items-center gap-4 px-6">
+            <div className="flex items-center gap-3">
+              <Button variant="ghost" size="icon" className="lg:hidden">
+                <Menu className="size-5" />
+              </Button>
+              <Gavel className="size-6 text-primary" />
+              <div>
+                <h1 className="font-semibold text-lg">LegalTech Pro</h1>
+                <p className="text-xs text-muted-foreground hidden sm:block">Practice Management System</p>
+              </div>
+            </div>
+            
+            <div className="ml-auto flex items-center gap-2">
+              <div className="relative hidden sm:block">
+                <Search className="absolute left-2.5 top-2.5 size-4 text-muted-foreground" />
+                <input
+                  type="search"
+                  placeholder="Search cases, clients, documents..."
+                  className="h-9 w-64 rounded-md border border-input bg-background pl-9 pr-4 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                />
+              </div>
+              
+              <Button variant="outline" size="icon" className="relative">
+                <Bell className="size-4" />
+                <span className="absolute -right-1 -top-1 size-4 rounded-full bg-primary text-[10px] font-bold text-primary-foreground flex items-center justify-center">3</span>
+                <span className="sr-only">Notifications</span>
+              </Button>
+              
+              <div className="h-6 w-px bg-border mx-1" />
+              
+              <Button variant="ghost" className="gap-2">
+                <Avatar className="size-8">
+                  <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-600 text-white text-xs font-semibold">
+                    JD
+                  </AvatarFallback>
+                </Avatar>
+                <div className="text-left hidden sm:block">
+                  <p className="text-sm font-medium">John Doe</p>
+                  <p className="text-xs text-muted-foreground">Senior Attorney</p>
+                </div>
+              </Button>
+            </div>
           </div>
         </header>
-        
-        <main className="flex-1 space-y-6 p-8">
+
+        <main className="flex-1 p-6 space-y-6">
+          <div className="flex flex-col gap-2">
+            <h2 className="text-3xl font-bold tracking-tight">{greeting}, John!</h2>
+            <p className="text-muted-foreground">
+              Here's what's happening with your practice today. You have <span className="font-medium text-foreground">5 urgent tasks</span> and <span className="font-medium text-foreground">3 new messages</span>.
+            </p>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">
-                  Total Revenue
-                </CardTitle>
-                <DollarSign className="size-4 text-muted-foreground" />
+            <Card className="relative overflow-hidden group hover:shadow-lg transition-all duration-300">
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+                <div>
+                  <CardTitle className="text-sm font-medium text-muted-foreground">Monthly Revenue</CardTitle>
+                  <CardDescription className="text-xs">This month's billings</CardDescription>
+                </div>
+                <div className="flex items-center justify-center size-10 rounded-lg bg-blue-500/10 text-blue-600">
+                  <DollarSign className="size-5" />
+                </div>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">$45,231.89</div>
-                <p className="text-xs text-muted-foreground">
-                  +20.1% from last month
+                <div className="flex items-baseline gap-2">
+                  <div className="text-3xl font-bold">$124,567</div>
+                  <Badge variant="secondary" className="text-xs bg-green-100 text-green-800 hover:bg-green-100">
+                    <TrendingUp className="size-3 mr-1" />
+                    +12.5%
+                  </Badge>
+                </div>
+                <p className="text-xs text-muted-foreground mt-2">
+                  <span className="font-medium text-foreground">$13,892</span> vs last month
                 </p>
+                <div className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-muted">
+                  <div className="h-full bg-blue-500 transition-all duration-1000" style={{ width: "78%" }} />
+                </div>
+                <p className="text-[10px] text-muted-foreground mt-1">78% of monthly target achieved</p>
               </CardContent>
             </Card>
-            
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">
-                  Subscriptions
-                </CardTitle>
-                <Users className="size-4 text-muted-foreground" />
+
+            <Card className="relative overflow-hidden group hover:shadow-lg transition-all duration-300">
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+                <div>
+                  <CardTitle className="text-sm font-medium text-muted-foreground">Active Cases</CardTitle>
+                  <CardDescription className="text-xs">Currently handling</CardDescription>
+                </div>
+                <div className="flex items-center justify-center size-10 rounded-lg bg-purple-500/10 text-purple-600">
+                  <Briefcase className="size-5" />
+                </div>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">+2350</div>
-                <p className="text-xs text-muted-foreground">
-                  +180.1% from last month
+                <div className="flex items-baseline gap-2">
+                  <div className="text-3xl font-bold">47</div>
+                  <Badge variant="secondary" className="text-xs bg-green-100 text-green-800 hover:bg-green-100">
+                    <TrendingUp className="size-3 mr-1" />
+                    +3
+                  </Badge>
+                </div>
+                <p className="text-xs text-muted-foreground mt-2">
+                  <span className="font-medium text-foreground">12 urgent</span> cases need attention
                 </p>
+                <div className="mt-3 space-y-2">
+                  <div className="flex items-center gap-2">
+                    <div className="flex-1 h-1.5 overflow-hidden rounded-full bg-muted">
+                      <div className="h-full bg-green-500 transition-all" style={{ width: "65%" }} />
+                    </div>
+                    <span className="text-[10px] text-muted-foreground whitespace-nowrap">Civil: 31</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="flex-1 h-1.5 overflow-hidden rounded-full bg-muted">
+                      <div className="h-full bg-orange-500 transition-all" style={{ width: "35%" }} />
+                    </div>
+                    <span className="text-[10px] text-muted-foreground whitespace-nowrap">Criminal: 16</span>
+                  </div>
+                </div>
               </CardContent>
             </Card>
-            
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">
-                  Sales
-                </CardTitle>
-                <CreditCard className="size-4 text-muted-foreground" />
+
+            <Card className="relative overflow-hidden group hover:shadow-lg transition-all duration-300">
+              <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+                <div>
+                  <CardTitle className="text-sm font-medium text-muted-foreground">Hours Billed</CardTitle>
+                  <CardDescription className="text-xs">This week</CardDescription>
+                </div>
+                <div className="flex items-center justify-center size-10 rounded-lg bg-green-500/10 text-green-600">
+                  <Clock className="size-5" />
+                </div>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">+12,234</div>
-                <p className="text-xs text-muted-foreground">
-                  +19% from last month
+                <div className="flex items-baseline gap-2">
+                  <div className="text-3xl font-bold">142.5</div>
+                  <Badge variant="secondary" className="text-xs bg-green-100 text-green-800 hover:bg-green-100">
+                    <TrendingUp className="size-3 mr-1" />
+                    +8.2%
+                  </Badge>
+                </div>
+                <p className="text-xs text-muted-foreground mt-2">
+                  <span className="font-medium text-foreground">Target: 160 hours</span>
                 </p>
+                <div className="mt-3 flex items-center gap-4">
+                  <div className="flex-1">
+                    <div className="text-[10px] text-muted-foreground mb-1">Billable</div>
+                    <div className="text-sm font-semibold text-green-600">135.2h</div>
+                  </div>
+                  <div className="flex-1">
+                    <div className="text-[10px] text-muted-foreground mb-1">Non-billable</div>
+                    <div className="text-sm font-semibold text-orange-600">7.3h</div>
+                  </div>
+                </div>
               </CardContent>
             </Card>
-            
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">
-                  Active Now
-                </CardTitle>
-                <TrendingUp className="size-4 text-muted-foreground" />
+
+            <Card className="relative overflow-hidden group hover:shadow-lg transition-all duration-300">
+              <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+                <div>
+                  <CardTitle className="text-sm font-medium text-muted-foreground">New Clients</CardTitle>
+                  <CardDescription className="text-xs">This month</CardDescription>
+                </div>
+                <div className="flex items-center justify-center size-10 rounded-lg bg-orange-500/10 text-orange-600">
+                  <Users className="size-5" />
+                </div>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">+573</div>
-                <p className="text-xs text-muted-foreground">
-                  +201 since last hour
+                <div className="flex items-baseline gap-2">
+                  <div className="text-3xl font-bold">18</div>
+                  <Badge variant="secondary" className="text-xs bg-green-100 text-green-800 hover:bg-green-100">
+                    <TrendingUp className="size-3 mr-1" />
+                    +5
+                  </Badge>
+                </div>
+                <p className="text-xs text-muted-foreground mt-2">
+                  <span className="font-medium text-foreground">$28,450</span> retainer collected
                 </p>
+                <div className="mt-3 flex -space-x-2">
+                  {["AS", "MJ", "RK", "JD", "LM"].slice(0, 4).map((initials) => (
+                    <Avatar key={initials} className="size-8 border-2 border-background">
+                      <AvatarFallback className="bg-gradient-to-br from-orange-400 to-red-500 text-white text-[10px] font-bold">
+                        {initials}
+                      </AvatarFallback>
+                    </Avatar>
+                  ))}
+                  {true && (
+                    <div className="flex items-center justify-center size-8 rounded-full border-2 border-background bg-muted text-[10px] font-medium">
+                      +14
+                    </div>
+                  )}
+                </div>
               </CardContent>
             </Card>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-7 gap-4">
-            <Card className="col-span-4">
+            <Card className="col-span-4 hover:shadow-lg transition-all duration-300">
               <CardHeader>
-                <CardTitle>Revenue Overview</CardTitle>
-                <CardDescription>
-                  Monthly revenue breakdown by category
-                </CardDescription>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <CardTitle>Revenue by Practice Area</CardTitle>
+                    <CardDescription>Monthly breakdown across all practice areas</CardDescription>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Button variant="outline" size="sm" className="gap-1">
+                      <Filter className="size-3" />
+                      Filter
+                    </Button>
+                    <Button variant="outline" size="sm" className="gap-1">
+                      <SortAsc className="size-3" />
+                      Sort
+                    </Button>
+                  </div>
+                </div>
               </CardHeader>
               <CardContent>
-                <div className="space-y-8 pt-4">
+                <div className="space-y-6 pt-4">
                   {[
-                    { category: "Product A", revenue: 45000, percentage: 45 },
-                    { category: "Product B", revenue: 32000, percentage: 32 },
-                    { category: "Product C", revenue: 18000, percentage: 18 },
-                    { category: "Product D", revenue: 5000, percentage: 5 },
+                    { category: "Corporate Law", revenue: 48500, percentage: 42, color: "bg-blue-500", cases: 12 },
+                    { category: "Civil Litigation", revenue: 32100, percentage: 28, color: "bg-purple-500", cases: 18 },
+                    { category: "Real Estate", revenue: 19800, percentage: 17, color: "bg-green-500", cases: 9 },
+                    { category: "Family Law", revenue: 10500, percentage: 9, color: "bg-orange-500", cases: 8 },
+                    { category: "Intellectual Property", revenue: 4667, percentage: 4, color: "bg-pink-500", cases: 3 },
                   ].map((item) => (
-                    <div key={`revenue-${item.category}`}>
+                    <div key={`revenue-${item.category}`} className="group">
                       <div className="flex items-center justify-between text-sm mb-2">
-                        <span className="font-medium">{item.category}</span>
-                        <span className="text-muted-foreground">${item.revenue.toLocaleString()}</span>
+                        <div className="flex items-center gap-2">
+                          <div className={`size-2 rounded-full ${item.color}`} />
+                          <span className="font-medium group-hover:text-primary transition-colors">{item.category}</span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <span className="text-xs text-muted-foreground">{item.cases} cases</span>
+                          <span className="font-semibold">${item.revenue.toLocaleString()}</span>
+                        </div>
                       </div>
-                      <div className="h-2 w-full overflow-hidden rounded-full bg-muted">
+                      <div className="h-2.5 w-full overflow-hidden rounded-full bg-muted/50">
                         <div
-                          className="h-full bg-primary transition-all duration-500"
+                          className={`h-full ${item.color} transition-all duration-1000 ease-out group-hover:brightness-110`}
                           style={{ width: `${item.percentage}%` }}
                         />
                       </div>
                     </div>
                   ))}
                 </div>
+                <div className="mt-6 pt-4 border-t flex items-center justify-between">
+                  <div className="text-sm">
+                    <span className="text-muted-foreground">Total Revenue:</span>
+                    <span className="ml-2 font-semibold text-lg">$115,567</span>
+                  </div>
+                  <Button variant="outline" size="sm" className="gap-1">
+                    <ArrowUpRight className="size-3" />
+                    View Report
+                  </Button>
+                </div>
               </CardContent>
             </Card>
 
-            <Card className="col-span-3">
+            <Card className="col-span-3 hover:shadow-lg transition-all duration-300">
               <CardHeader>
                 <CardTitle>Quick Actions</CardTitle>
-                <CardDescription>
-                  Common tasks and shortcuts
-                </CardDescription>
+                <CardDescription>Frequent tasks at your fingertips</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="space-y-3">
-                  <Button variant="outline" className="w-full justify-start">
-                    <Plus className="mr-2 size-4" />
-                    Create New User
+                <div className="grid grid-cols-2 gap-3">
+                  <Button variant="outline" className="h-auto flex-col gap-2 py-4 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700 transition-all">
+                    <div className="flex items-center justify-center size-10 rounded-lg bg-blue-100 text-blue-600">
+                      <Plus className="size-5" />
+                    </div>
+                    <div className="text-center">
+                      <div className="text-sm font-medium">New Case</div>
+                      <div className="text-xs text-muted-foreground">Create intake</div>
+                    </div>
                   </Button>
-                  <Button variant="outline" className="w-full justify-start">
-                    <FileText className="mr-2 size-4" />
-                    Upload Document
+                  
+                  <Button variant="outline" className="h-auto flex-col gap-2 py-4 hover:bg-purple-50 hover:border-purple-300 hover:text-purple-700 transition-all">
+                    <div className="flex items-center justify-center size-10 rounded-lg bg-purple-100 text-purple-600">
+                      <FileText className="size-5" />
+                    </div>
+                    <div className="text-center">
+                      <div className="text-sm font-medium">Upload Doc</div>
+                      <div className="text-xs text-muted-foreground">Add to case</div>
+                    </div>
                   </Button>
-                  <Button variant="outline" className="w-full justify-start">
-                    <Calendar className="mr-2 size-4" />
-                    Schedule Meeting
+                  
+                  <Button variant="outline" className="h-auto flex-col gap-2 py-4 hover:bg-green-50 hover:border-green-300 hover:text-green-700 transition-all">
+                    <div className="flex items-center justify-center size-10 rounded-lg bg-green-100 text-green-600">
+                      <Calendar className="size-5" />
+                    </div>
+                    <div className="text-center">
+                      <div className="text-sm font-medium">Schedule</div>
+                      <div className="text-xs text-muted-foreground">Set hearing</div>
+                    </div>
                   </Button>
-                  <Button variant="outline" className="w-full justify-start">
-                    <Package className="mr-2 size-4" />
-                    Create Invoice
+                  
+                  <Button variant="outline" className="h-auto flex-col gap-2 py-4 hover:bg-orange-50 hover:border-orange-300 hover:text-orange-700 transition-all">
+                    <div className="flex items-center justify-center size-10 rounded-lg bg-orange-100 text-orange-600">
+                      <Timer className="size-5" />
+                    </div>
+                    <div className="text-center">
+                      <div className="text-sm font-medium">Track Time</div>
+                      <div className="text-xs text-muted-foreground">Start timer</div>
+                    </div>
                   </Button>
-                  <Button variant="outline" className="w-full justify-start">
-                    <Settings className="mr-2 size-4" />
-                    Settings
+                  
+                  <Button variant="outline" className="h-auto flex-col gap-2 py-4 hover:bg-cyan-50 hover:border-cyan-300 hover:text-cyan-700 transition-all">
+                    <div className="flex items-center justify-center size-10 rounded-lg bg-cyan-100 text-cyan-600">
+                      <Receipt className="size-5" />
+                    </div>
+                    <div className="text-center">
+                      <div className="text-sm font-medium">Invoice</div>
+                      <div className="text-xs text-muted-foreground">Generate bill</div>
+                    </div>
+                  </Button>
+                  
+                  <Button variant="outline" className="h-auto flex-col gap-2 py-4 hover:bg-pink-50 hover:border-pink-300 hover:text-pink-700 transition-all">
+                    <div className="flex items-center justify-center size-10 rounded-lg bg-pink-100 text-pink-600">
+                      <Users className="size-5" />
+                    </div>
+                    <div className="text-center">
+                      <div className="text-sm font-medium">Client</div>
+                      <div className="text-xs text-muted-foreground">Add contact</div>
+                    </div>
+                  </Button>
+                </div>
+                
+                <div className="mt-4 pt-4 border-t">
+                  <Button className="w-full gap-2">
+                    <Sparkles className="size-4" />
+                    AI Assistant
                   </Button>
                 </div>
               </CardContent>
@@ -199,209 +398,275 @@ export function DashboardPage() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-            <Card className="col-span-2">
+            <Card className="col-span-2 hover:shadow-lg transition-all duration-300">
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <div>
-                    <CardTitle>Recent Transactions</CardTitle>
-                    <CardDescription>
-                      Your latest financial activities
-                    </CardDescription>
+                    <CardTitle>Recent Invoices</CardTitle>
+                    <CardDescription>Latest billing activities and payments</CardDescription>
                   </div>
-                  <Button variant="outline" size="icon">
-                    <ArrowUpRight className="size-4" />
-                    <span className="sr-only">View All</span>
-                  </Button>
+                  <div className="flex items-center gap-2">
+                    <Button variant="outline" size="sm">All Invoices</Button>
+                    <Button size="sm" className="gap-1">
+                      <Receipt className="size-3" />
+                      Create Invoice
+                    </Button>
+                  </div>
                 </div>
               </CardHeader>
               <CardContent>
-                <div className="space-y-4">
+                <div className="space-y-3">
                   {[
                     {
-                      name: "Alice Johnson",
-                      type: "Payment",
-                      amount: "$2,400.00",
-                      status: "Completed",
-                      date: "2 min ago",
-                      icon: <CheckCircle2 className="size-4 text-green-600" />,
+                      client: "Acme Corporation",
+                      case: "Merger Agreement #2847",
+                      invoice: "INV-2024-1247",
+                      amount: "$12,450.00",
+                      status: "Paid",
+                      date: "Dec 14, 2024",
+                      avatar: "AC",
+                      color: "from-blue-500 to-blue-600"
                     },
                     {
-                      name: "Bob Smith",
-                      type: "Subscription",
-                      amount: "$49.00",
-                      status: "Active",
-                      date: "15 min ago",
-                      icon: <CircleDashed className="size-4 text-blue-600" />,
+                      client: "Johnson Family Trust",
+                      case: "Estate Planning",
+                      invoice: "INV-2024-1246",
+                      amount: "$8,200.00",
+                      status: "Pending",
+                      date: "Dec 13, 2024",
+                      avatar: "JT",
+                      color: "from-purple-500 to-purple-600"
                     },
                     {
-                      name: "Carol White",
-                      type: "Refund",
-                      amount: "$120.00",
-                      status: "Processing",
-                      date: "1 hour ago",
-                      icon: <CircleDashed className="size-4 text-orange-600" />,
+                      client: "TechStart Inc.",
+                      case: "IP Protection",
+                      invoice: "INV-2024-1245",
+                      amount: "$15,800.00",
+                      status: "Overdue",
+                      date: "Dec 11, 2024",
+                      avatar: "TS",
+                      color: "from-orange-500 to-orange-600"
                     },
                     {
-                      name: "David Brown",
-                      type: "Payment",
-                      amount: "$3,500.00",
-                      status: "Completed",
-                      date: "2 hours ago",
-                      icon: <CheckCircle2 className="size-4 text-green-600" />,
+                      client: "MediCare Plus",
+                      case: "Contract Review",
+                      invoice: "INV-2024-1244",
+                      amount: "$6,350.00",
+                      status: "Paid",
+                      date: "Dec 10, 2024",
+                      avatar: "MC",
+                      color: "from-green-500 to-green-600"
                     },
                     {
-                      name: "Eva Green",
-                      type: "Subscription",
-                      amount: "$99.00",
-                      status: "Active",
-                      date: "3 hours ago",
-                      icon: <CircleDashed className="size-4 text-blue-600" />,
+                      client: "Sarah Mitchell",
+                      case: "Divorce Settlement",
+                      invoice: "INV-2024-1243",
+                      amount: "$4,750.00",
+                      status: "Pending",
+                      date: "Dec 9, 2024",
+                      avatar: "SM",
+                      color: "from-pink-500 to-pink-600"
                     },
-                  ].map((transaction) => (
-                    <div key={transaction.name} className="flex items-center gap-4">
-                      <Avatar>
-                        <AvatarFallback>
-                          {transaction.name.split(" ")[0][0]}
+                  ].map((invoice) => (
+                    <div key={invoice.invoice} className="group flex items-center gap-4 p-3 rounded-lg border hover:bg-muted/50 hover:border-primary/30 transition-all cursor-pointer">
+                      <Avatar className="size-10 ring-2 ring-transparent group-hover:ring-primary/20 transition-all">
+                        <AvatarFallback className={`bg-gradient-to-br ${invoice.color} text-white text-xs font-bold`}>
+                          {invoice.avatar}
                         </AvatarFallback>
                       </Avatar>
-                      <div className="flex-1 space-y-1">
-                        <p className="text-sm font-medium">{transaction.name}</p>
-                        <p className="text-sm text-muted-foreground">
-                          {transaction.type} • {transaction.amount}
-                        </p>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-1">
+                          <p className="text-sm font-semibold truncate">{invoice.client}</p>
+                          <Badge variant={
+                            invoice.status === "Paid" ? "default" :
+                            invoice.status === "Pending" ? "secondary" : "destructive"
+                          } className="text-xs">
+                            {invoice.status}
+                          </Badge>
+                        </div>
+                        <p className="text-xs text-muted-foreground truncate">{invoice.case}</p>
                       </div>
-                      <div className="flex flex-col items-end gap-1">
-                        {transaction.icon}
-                        <Badge variant="outline" className="text-xs">
-                          {transaction.status}
-                        </Badge>
+                      <div className="text-right">
+                        <p className="text-sm font-bold">{invoice.amount}</p>
+                        <p className="text-xs text-muted-foreground">{invoice.invoice}</p>
+                      </div>
+                      <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <Button variant="ghost" size="icon" className="size-8">
+                          <Eye className="size-3.5" />
+                        </Button>
+                        <Button variant="ghost" size="icon" className="size-8">
+                          <Download className="size-3.5" />
+                        </Button>
                       </div>
                     </div>
                   ))}
                 </div>
               </CardContent>
-              <CardFooter>
-                <Button variant="outline" className="w-full">
-                  View All Transactions
+              <CardFooter className="flex items-center justify-between border-t pt-4">
+                <div className="text-sm text-muted-foreground">
+                  Total unpaid: <span className="font-semibold text-foreground">$23,750</span>
+                </div>
+                <Button variant="outline" size="sm" className="gap-1">
+                  <ArrowUpRight className="size-3" />
+                  View All Invoices
                 </Button>
               </CardFooter>
             </Card>
 
-            <Card>
+            <Card className="hover:shadow-lg transition-all duration-300">
               <CardHeader>
-                <CardTitle>Account Status</CardTitle>
-                <CardDescription>
-                  Your subscription details
-                </CardDescription>
+                <CardTitle>Subscription</CardTitle>
+                <CardDescription>Current plan and usage</CardDescription>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm">Plan</span>
-                    <Badge>Pro</Badge>
+              <CardContent className="space-y-5">
+                <div className="relative rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 p-4 border border-primary/20">
+                  <div className="flex items-center justify-between mb-3">
+                    <Badge className="bg-primary text-primary-foreground">Professional Plan</Badge>
+                    <Award className="size-5 text-primary" />
                   </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm">Status</span>
-                    <Badge variant="default">Active</Badge>
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-3xl font-bold">$299</span>
+                    <span className="text-sm text-muted-foreground">/month</span>
                   </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm">Storage</span>
-                    <span className="text-sm font-medium">75%</span>
+                  <p className="text-xs text-muted-foreground mt-2">Renews on January 15, 2025</p>
+                  <div className="absolute -right-4 -top-4 size-16 rounded-full bg-primary/20 blur-2xl" />
+                </div>
+
+                <div className="space-y-4">
+                  <div>
+                    <div className="flex items-center justify-between text-sm mb-2">
+                      <span className="text-muted-foreground">Documents Storage</span>
+                      <span className="font-semibold">156.3 GB / 200 GB</span>
+                    </div>
+                    <div className="h-2 w-full overflow-hidden rounded-full bg-muted">
+                      <div className="h-full bg-gradient-to-r from-blue-500 to-blue-600 transition-all duration-1000" style={{ width: "78%" }} />
+                    </div>
                   </div>
-                  <div className="h-2 w-full overflow-hidden rounded-full bg-muted">
-                    <div
-                      className="h-full bg-primary transition-all"
-                      style={{ width: "75%" }}
-                    />
+
+                  <div>
+                    <div className="flex items-center justify-between text-sm mb-2">
+                      <span className="text-muted-foreground">AI Requests (Month)</span>
+                      <span className="font-semibold">2,450 / 5,000</span>
+                    </div>
+                    <div className="h-2 w-full overflow-hidden rounded-full bg-muted">
+                      <div className="h-full bg-gradient-to-r from-purple-500 to-purple-600 transition-all duration-1000" style={{ width: "49%" }} />
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="flex items-center justify-between text-sm mb-2">
+                      <span className="text-muted-foreground">Team Members</span>
+                      <span className="font-semibold">12 / 15</span>
+                    </div>
+                    <div className="h-2 w-full overflow-hidden rounded-full bg-muted">
+                      <div className="h-full bg-gradient-to-r from-green-500 to-green-600 transition-all duration-1000" style={{ width: "80%" }} />
+                    </div>
                   </div>
                 </div>
-                <Separator />
-                <div className="space-y-2 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Next billing</span>
-                    <span className="font-medium">Dec 15, 2024</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Amount</span>
-                    <span className="font-medium">$29.00</span>
-                  </div>
-                </div>
-                <Separator />
-                <Button className="w-full">
-                  Upgrade Plan
-                </Button>
               </CardContent>
+              <CardFooter className="border-t pt-4">
+                <Button variant="outline" className="w-full gap-2">
+                  <Sparkles className="size-4" />
+                  Upgrade to Enterprise
+                </Button>
+              </CardFooter>
             </Card>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-            <Card className="col-span-2">
+            <Card className="col-span-2 hover:shadow-lg transition-all duration-300">
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <div>
-                    <CardTitle>Activity Feed</CardTitle>
-                    <CardDescription>
-                      Recent updates and notifications
-                    </CardDescription>
+                    <CardTitle>Activity Stream</CardTitle>
+                    <CardDescription>Recent actions across your practice</CardDescription>
                   </div>
-                  <Button variant="outline" size="icon">
-                    <RefreshCw className="size-4" />
-                    <span className="sr-only">Refresh</span>
-                  </Button>
+                  <div className="flex items-center gap-2">
+                    <Button variant="outline" size="sm">Filter</Button>
+                    <Button variant="ghost" size="icon">
+                      <RefreshCw className="size-4" />
+                    </Button>
+                  </div>
                 </div>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
                   {[
                     {
-                      user: "John Doe",
-                      action: "uploaded a new document",
-                      detail: "Q4 Financial Report.pdf",
+                      user: "Sarah Mitchell",
+                      avatar: "SM",
+                      action: "uploaded new documents to case",
+                      detail: "Johnson v. Smith Estate",
                       time: "2 minutes ago",
-                      icon: <Upload className="size-4" />,
+                      icon: <Upload className="size-4 text-blue-600" />,
+                      type: "document"
                     },
                     {
-                      user: "Sarah Miller",
-                      action: "completed task",
-                      detail: "Review client contracts",
+                      user: "Michael Chen",
+                      avatar: "MC",
+                      action: "completed task in",
+                      detail: "Review deposition transcripts",
                       time: "15 minutes ago",
                       icon: <CheckCircle2 className="size-4 text-green-600" />,
+                      type: "task"
                     },
                     {
-                      user: "Mike Johnson",
-                      action: "commented on",
-                      detail: "Project Alpha discussion",
+                      user: "Emily Rodriguez",
+                      avatar: "ER",
+                      action: "scheduled a court hearing for",
+                      detail: "Case #2847 - Merger Agreement",
                       time: "1 hour ago",
-                      icon: <Mail className="size-4 text-blue-600" />,
+                      icon: <Calendar className="size-4 text-purple-600" />,
+                      type: "event"
                     },
                     {
-                      user: "Emily Chen",
-                      action: "updated",
-                      detail: "Dashboard metrics",
+                      user: "David Thompson",
+                      avatar: "DT",
+                      action: "sent invoice #1247 to",
+                      detail: "Acme Corporation - $12,450",
                       time: "2 hours ago",
-                      icon: <Activity className="size-4 text-purple-600" />,
+                      icon: <Receipt className="size-4 text-orange-600" />,
+                      type: "invoice"
                     },
                     {
-                      user: "Alex Turner",
-                      action: "created",
-                      detail: "New team workspace",
+                      user: "Jennifer Lee",
+                      avatar: "JL",
+                      action: "created new case",
+                      detail: "IP Infringement - TechStart Inc.",
                       time: "3 hours ago",
-                      icon: <Plus className="size-4 text-orange-600" />,
+                      icon: <Briefcase className="size-4 text-pink-600" />,
+                      type: "case"
                     },
-                  ].map((activity, index) => (
-                    <div key={`activity-${index}`} className="flex items-start gap-3">
-                      <Avatar className="size-8">
-                        <AvatarFallback className="text-xs">
-                          {activity.user.split(" ").map(n => n[0]).join("")}
+                    {
+                      user: "System",
+                      avatar: "SY",
+                      action: "AI analysis completed for",
+                      detail: "Contract Review - Merger Agreement",
+                      time: "4 hours ago",
+                      icon: <BrainCircuit className="size-4 text-cyan-600" />,
+                      type: "ai"
+                    },
+                  ].map((activity) => (
+                    <div key={`activity-${activity.user}`} className="group flex items-start gap-3 p-3 rounded-lg border hover:bg-muted/50 hover:border-primary/30 transition-all">
+                      <Avatar className="size-10 ring-2 ring-transparent group-hover:ring-primary/20 transition-all">
+                        <AvatarFallback className={`${
+                          activity.type === "document" ? "from-blue-500 to-blue-600" :
+                          activity.type === "task" ? "from-green-500 to-green-600" :
+                          activity.type === "event" ? "from-purple-500 to-purple-600" :
+                          activity.type === "invoice" ? "from-orange-500 to-orange-600" :
+                          activity.type === "case" ? "from-pink-500 to-pink-600" :
+                          "from-cyan-500 to-cyan-600"
+                        } bg-gradient-to-br text-white text-xs font-bold`}>
+                          {activity.avatar}
                         </AvatarFallback>
                       </Avatar>
-                      <div className="flex-1 space-y-1">
+                      <div className="flex-1 min-w-0">
                         <p className="text-sm">
-                          <span className="font-medium">{activity.user}</span> {activity.action}
+                          <span className="font-semibold">{activity.user}</span> {activity.action}
                         </p>
-                        <p className="text-sm text-muted-foreground">{activity.detail}</p>
+                        <p className="text-sm text-muted-foreground truncate">{activity.detail}</p>
                       </div>
-                      <div className="text-xs text-muted-foreground flex items-center gap-1">
+                      <div className="text-xs text-muted-foreground flex items-center gap-1 whitespace-nowrap">
                         <Clock className="size-3" />
                         {activity.time}
                       </div>
@@ -409,42 +674,92 @@ export function DashboardPage() {
                   ))}
                 </div>
               </CardContent>
-              <CardFooter>
-                <Button variant="outline" className="w-full">
+              <CardFooter className="border-t pt-4">
+                <Button variant="outline" className="w-full gap-1">
+                  <ArrowUpRight className="size-3" />
                   View All Activity
                 </Button>
               </CardFooter>
             </Card>
 
-            <Card>
+            <Card className="hover:shadow-lg transition-all duration-300">
               <CardHeader>
-                <CardTitle>Upcoming Tasks</CardTitle>
-                <CardDescription>
-                  Tasks due this week
-                </CardDescription>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <CardTitle>Upcoming Deadlines</CardTitle>
+                    <CardDescription>Tasks requiring attention</CardDescription>
+                  </div>
+                  <Badge variant="secondary" className="bg-orange-100 text-orange-800">5 urgent</Badge>
+                </div>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
                   {[
-                    { task: "Review quarterly report", priority: "High", due: "Today", color: "bg-red-500" },
-                    { task: "Team standup meeting", priority: "Medium", due: "Tomorrow", color: "bg-yellow-500" },
-                    { task: "Client presentation prep", priority: "High", due: "Wed", color: "bg-red-500" },
-                    { task: "Code review session", priority: "Low", due: "Thu", color: "bg-green-500" },
-                    { task: "Sprint planning", priority: "Medium", due: "Fri", color: "bg-yellow-500" },
+                    {
+                      task: "File court brief for merger case",
+                      case: "Merger Agreement #2847",
+                      due: "Today, 5:00 PM",
+                      priority: "High",
+                      color: "from-red-500 to-red-600",
+                      icon: <AlertTriangle className="size-4" />
+                    },
+                    {
+                      task: "Client meeting - deposition prep",
+                      case: "Johnson v. Smith Estate",
+                      due: "Tomorrow, 10:00 AM",
+                      priority: "High",
+                      color: "from-orange-500 to-orange-600",
+                      icon: <CalendarCheck className="size-4" />
+                    },
+                    {
+                      task: "Review AI-generated contract analysis",
+                      case: "IP Infringement Case",
+                      due: "Wed, 2:00 PM",
+                      priority: "Medium",
+                      color: "from-yellow-500 to-yellow-600",
+                      icon: <BrainCircuit className="size-4" />
+                    },
+                    {
+                      task: "Submit discovery documents",
+                      case: "Civil Litigation #2845",
+                      due: "Thu, 12:00 PM",
+                      priority: "Medium",
+                      color: "from-blue-500 to-blue-600",
+                      icon: <ClipboardList className="size-4" />
+                    },
+                    {
+                      task: "Follow up on pending invoices",
+                      case: "Multiple Clients",
+                      due: "Fri, 4:00 PM",
+                      priority: "Low",
+                      color: "from-green-500 to-green-600",
+                      icon: <Receipt className="size-4" />
+                    },
                   ].map((item, index) => (
-                    <div key={`task-${index}`} className="flex items-center gap-3 p-3 rounded-lg border">
-                      <div className={`size-2 rounded-full ${item.color}`} />
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium truncate">{item.task}</p>
-                        <p className="text-xs text-muted-foreground">{item.due}</p>
+                    <div key={`task-${index}`} className="group flex items-start gap-3 p-3 rounded-lg border hover:bg-muted/50 hover:border-primary/30 transition-all cursor-pointer">
+                      <div className={`flex items-center justify-center size-10 rounded-lg bg-gradient-to-br ${item.color} text-white shrink-0`}>
+                        {item.icon}
                       </div>
-                      <Badge variant="outline" className="text-xs">{item.priority}</Badge>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-1">
+                          <p className="text-sm font-medium truncate">{item.task}</p>
+                          <Badge variant={item.priority === "High" ? "destructive" : item.priority === "Medium" ? "secondary" : "outline"} className="text-xs shrink-0">
+                            {item.priority}
+                          </Badge>
+                        </div>
+                        <p className="text-xs text-muted-foreground truncate">{item.case}</p>
+                        <div className="flex items-center gap-1 text-xs text-muted-foreground mt-1">
+                          <Clock className="size-3" />
+                          {item.due}
+                        </div>
+                      </div>
                     </div>
                   ))}
                 </div>
               </CardContent>
-              <CardFooter>
-                <Button variant="outline" className="w-full">
+              <CardFooter className="border-t pt-4">
+                <Button variant="outline" className="w-full gap-1">
+                  <ClipboardList className="size-3" />
                   View All Tasks
                 </Button>
               </CardFooter>
@@ -452,33 +767,38 @@ export function DashboardPage() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
-            <Card className="col-span-1">
+            <Card className="col-span-1 hover:shadow-lg transition-all duration-300">
               <CardHeader>
-                <CardTitle>Performance</CardTitle>
-                <CardDescription>
-                  Key metrics this month
-                </CardDescription>
+                <CardTitle>Practice Metrics</CardTitle>
+                <CardDescription>This month's performance</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 {[
-                  { label: "Response Time", value: "1.2s", change: "+12%", trend: "up" },
-                  { label: "Uptime", value: "99.9%", change: "+0.1%", trend: "up" },
-                  { label: "Errors", value: "0.2%", change: "-15%", trend: "down" },
-                  { label: "Satisfaction", value: "4.8", change: "+0.3", trend: "up" },
+                  { label: "Case Win Rate", value: "78%", change: "+5%", trend: "up", icon: <Award className="size-3.5" /> },
+                  { label: "Client Satisfaction", value: "4.7/5", change: "+0.3", trend: "up", icon: <Star className="size-3.5" /> },
+                  { label: "Avg. Response Time", value: "2.1h", change: "-15%", trend: "down", icon: <Clock className="size-3.5" /> },
+                  { label: "Billed Hours", value: "685", change: "+12%", trend: "up", icon: <Timer className="size-3.5" /> },
+                  { label: "Collections", value: "94%", change: "+2%", trend: "up", icon: <DollarSign className="size-3.5" /> },
+                  { label: "AI Tasks Completed", value: "234", change: "+45%", trend: "up", icon: <Sparkles className="size-3.5" /> },
                 ].map((metric, index) => (
-                  <div key={`metric-${index}`} className="space-y-1">
-                    <div className="flex items-center justify-between text-sm">
-                      <span className="text-muted-foreground">{metric.label}</span>
-                      <span className="font-medium">{metric.value}</span>
+                  <div key={`metric-${index}`} className="group space-y-2 p-2 rounded-lg hover:bg-muted/50 transition-all cursor-pointer">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <div className="flex items-center justify-center size-6 rounded-md bg-muted text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary transition-colors">
+                          {metric.icon}
+                        </div>
+                        <span className="text-sm font-medium">{metric.label}</span>
+                      </div>
+                      <span className="text-sm font-bold">{metric.value}</span>
                     </div>
-                    <div className="flex items-center gap-2 text-xs">
+                    <div className="flex items-center gap-2 text-xs ml-8">
                       {metric.trend === "up" ? (
                         <TrendingUp className="size-3 text-green-600" />
                       ) : (
-                        <ArrowUpRight className="size-3 text-red-600 rotate-180" />
+                        <ArrowUpRight className="size-3 text-green-600 rotate-180" />
                       )}
-                      <span className={metric.trend === "up" ? "text-green-600" : "text-red-600"}>
-                        {metric.change}
+                      <span className={metric.trend === "up" || metric.label.includes("Response") || metric.label.includes("Collections") ? "text-green-600" : "text-red-600"}>
+                        {metric.change} from last month
                       </span>
                     </div>
                   </div>
@@ -486,118 +806,199 @@ export function DashboardPage() {
               </CardContent>
             </Card>
 
-            <Card className="col-span-3">
+            <Card className="col-span-3 hover:shadow-lg transition-all duration-300">
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <div>
-                    <CardTitle>Team Members</CardTitle>
-                    <CardDescription>
-                      Active team members
-                    </CardDescription>
+                    <CardTitle>Legal Team</CardTitle>
+                    <CardDescription>12 active members online now</CardDescription>
                   </div>
-                  <Button variant="outline" size="icon">
-                    <MoreHorizontal className="size-4" />
-                  </Button>
+                  <div className="flex items-center gap-2">
+                    <Button variant="outline" size="sm" className="gap-1">
+                      <Filter className="size-3" />
+                      Filter
+                    </Button>
+                    <Button variant="ghost" size="icon">
+                      <MoreHorizontal className="size-4" />
+                    </Button>
+                  </div>
                 </div>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {[
-                    { name: "John Doe", role: "Project Manager", status: "Online" },
-                    { name: "Sarah Miller", role: "Developer", status: "Online" },
-                    { name: "Mike Johnson", role: "Designer", status: "Away" },
-                    { name: "Emily Chen", role: "QA Engineer", status: "Online" },
-                    { name: "Alex Turner", role: "DevOps", status: "Offline" },
-                    { name: "Lisa Park", role: "Product Owner", status: "Online" },
+                    { name: "John Doe", role: "Senior Attorney", status: "Online", initials: "JD", cases: 8, color: "from-blue-500 to-blue-600" },
+                    { name: "Sarah Mitchell", role: "Associate Attorney", status: "Online", initials: "SM", cases: 5, color: "from-purple-500 to-purple-600" },
+                    { name: "Michael Chen", role: "Paralegal", status: "In Meeting", initials: "MC", cases: 12, color: "from-green-500 to-green-600" },
+                    { name: "Emily Rodriguez", role: "Legal Assistant", status: "Online", initials: "ER", cases: 6, color: "from-orange-500 to-orange-600" },
+                    { name: "David Thompson", role: "Partner", status: "Away", initials: "DT", cases: 4, color: "from-pink-500 to-pink-600" },
+                    { name: "Jennifer Lee", role: "Special Counsel", status: "Online", initials: "JL", cases: 7, color: "from-cyan-500 to-cyan-600" },
                   ].map((member, index) => (
-                    <div key={`member-${index}`} className="flex items-center gap-3 p-3 rounded-lg border">
-                      <Avatar>
-                        <AvatarFallback>
-                          {member.name.split(" ").map(n => n[0]).join("")}
-                        </AvatarFallback>
-                      </Avatar>
+                    <div key={`member-${index}`} className="group flex items-center gap-3 p-3 rounded-lg border hover:bg-muted/50 hover:border-primary/30 transition-all cursor-pointer">
+                      <div className="relative">
+                        <Avatar className="size-10 ring-2 ring-transparent group-hover:ring-primary/20 transition-all">
+                          <AvatarFallback className={`bg-gradient-to-br ${member.color} text-white text-xs font-bold`}>
+                            {member.initials}
+                          </AvatarFallback>
+                        </Avatar>
+                        <div className={`absolute -bottom-0.5 -right-0.5 size-3 rounded-full border-2 border-background ${
+                          member.status === "Online" ? "bg-green-500" :
+                          member.status === "In Meeting" ? "bg-orange-500" :
+                          member.status === "Away" ? "bg-yellow-500" : "bg-gray-500"
+                        }`} />
+                      </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium truncate">{member.name}</p>
+                        <p className="text-sm font-semibold truncate group-hover:text-primary transition-colors">{member.name}</p>
                         <p className="text-xs text-muted-foreground">{member.role}</p>
                       </div>
-                      <div className={`size-2 rounded-full ${
-                        member.status === "Online" ? "bg-green-500" :
-                        member.status === "Away" ? "bg-yellow-500" : "bg-gray-500"
-                      }`} />
+                      <div className="text-right shrink-0">
+                        <div className="text-xs font-medium text-muted-foreground">{member.cases} cases</div>
+                        <Badge variant="outline" className="text-[10px] mt-0.5">
+                          {member.status}
+                        </Badge>
+                      </div>
                     </div>
                   ))}
                 </div>
               </CardContent>
-              <CardFooter>
-                <Button variant="outline" className="w-full">
-                  Manage Team
-                </Button>
+              <CardFooter className="border-t pt-4">
+                <div className="flex items-center justify-between w-full">
+                  <div className="flex -space-x-2">
+                    {["JD", "SM", "MC", "ER"].map((initials) => (
+                      <Avatar key={initials} className="size-7 border-2 border-background">
+                        <AvatarFallback className="bg-gradient-to-br from-gray-400 to-gray-600 text-white text-[9px] font-bold">
+                          {initials}
+                        </AvatarFallback>
+                      </Avatar>
+                    ))}
+                    <div className="flex items-center justify-center size-7 rounded-full border-2 border-background bg-muted text-[9px] font-medium">
+                      +8
+                    </div>
+                  </div>
+                  <Button variant="outline" size="sm" className="gap-1">
+                    <Users className="size-3" />
+                    Manage Team
+                  </Button>
+                </div>
               </CardFooter>
             </Card>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <Card>
+            <Card className="hover:shadow-lg transition-all duration-300">
               <CardHeader>
-                <CardTitle>Recent Alerts</CardTitle>
-                <CardDescription>
-                  System notifications and warnings
-                </CardDescription>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <CardTitle>System Alerts</CardTitle>
+                    <CardDescription>Important notifications</CardDescription>
+                  </div>
+                  <Badge variant="destructive" className="animate-pulse">3 new</Badge>
+                </div>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
                   {[
-                    { type: "warning", message: "Storage usage approaching 90%", time: "2 hours ago" },
-                    { type: "error", message: "Database connection timeout", time: "5 hours ago" },
-                    { type: "info", message: "New feature deployment scheduled", time: "1 day ago" },
-                    { type: "success", message: "Backup completed successfully", time: "2 days ago" },
-                  ].map((alert, index) => (
-                    <div key={`alert-${index}`} className="flex items-start gap-3 p-3 rounded-lg border">
-                      {alert.type === "warning" && <AlertTriangle className="size-4 text-yellow-600" />}
-                      {alert.type === "error" && <AlertTriangle className="size-4 text-red-600" />}
-                      {alert.type === "info" && <Info className="size-4 text-blue-600" />}
-                      {alert.type === "success" && <CheckCircle2 className="size-4 text-green-600" />}
-                      <div className="flex-1">
-                        <p className="text-sm">{alert.message}</p>
-                        <p className="text-xs text-muted-foreground mt-1">{alert.time}</p>
+                    {
+                      type: "urgent",
+                      icon: <AlertTriangle className="size-4 text-red-600" />,
+                      iconBg: "bg-red-100",
+                      title: "Court filing deadline approaching",
+                      message: "Case #2847 requires filing by Dec 18",
+                      time: "2 hours ago",
+                      action: "View Case"
+                    },
+                    {
+                      type: "warning",
+                      icon: <AlertTriangle className="size-4 text-orange-600" />,
+                      iconBg: "bg-orange-100",
+                      title: "Storage usage at 87%",
+                      message: "Consider upgrading or archiving old documents",
+                      time: "5 hours ago",
+                      action: "Manage Storage"
+                    },
+                    {
+                      type: "info",
+                      icon: <Info className="size-4 text-blue-600" />,
+                      iconBg: "bg-blue-100",
+                      title: "AI model update available",
+                      message: "Contract Review AI v2.1 now available",
+                      time: "1 day ago",
+                      action: "Update Now"
+                    },
+                    {
+                      type: "success",
+                      icon: <CheckCircle2 className="size-4 text-green-600" />,
+                      iconBg: "bg-green-100",
+                      title: "Daily backup completed",
+                      message: "All 1,247 documents successfully backed up",
+                      time: "2 days ago",
+                      action: "View Logs"
+                    },
+                  ].map((alert) => (
+                    <div key={alert.title} className="group flex items-start gap-3 p-3 rounded-lg border hover:bg-muted/50 hover:border-primary/30 transition-all">
+                      <div className={`flex items-center justify-center size-10 rounded-lg ${alert.iconBg} shrink-0`}>
+                        {alert.icon}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-semibold truncate group-hover:text-primary transition-colors">{alert.title}</p>
+                        <p className="text-xs text-muted-foreground mt-0.5 truncate">{alert.message}</p>
+                        <div className="flex items-center justify-between mt-2">
+                          <span className="text-[10px] text-muted-foreground">{alert.time}</span>
+                          <Button variant="ghost" size="sm" className="text-xs h-6 px-2 hover:bg-primary/10">
+                            {alert.action}
+                          </Button>
+                        </div>
                       </div>
                     </div>
                   ))}
                 </div>
               </CardContent>
+              <CardFooter className="border-t pt-4">
+                <Button variant="outline" className="w-full gap-1">
+                  <Bell className="size-3" />
+                  View All Alerts
+                </Button>
+              </CardFooter>
             </Card>
 
-            <Card>
+            <Card className="hover:shadow-lg transition-all duration-300">
               <CardHeader>
-                <CardTitle>Help & Resources</CardTitle>
-                <CardDescription>
-                  Quick access to documentation and support
-                </CardDescription>
+                <div>
+                  <CardTitle>Resources & Support</CardTitle>
+                  <CardDescription>Help documentation and guides</CardDescription>
+                </div>
               </CardHeader>
               <CardContent>
-                <div className="space-y-3">
+                <div className="space-y-2">
                   {[
-                    { title: "Getting Started Guide", icon: <Book className="size-4" />, description: "Learn the basics" },
-                    { title: "API Documentation", icon: <Globe className="size-4" />, description: "API reference" },
-                    { title: "Video Tutorials", icon: <Play className="size-4" />, description: "Watch and learn" },
-                    { title: "Contact Support", icon: <HelpCircle className="size-4" />, description: "Get help" },
-                    { title: "Community Forum", icon: <Users className="size-4" />, description: "Join discussion" },
+                    { title: "Quick Start Guide", icon: <Book className="size-4" />, description: "Get started in 5 minutes", color: "from-blue-500 to-blue-600" },
+                    { title: "AI Documentation", icon: <Sparkles className="size-4" />, description: "Learn to use AI features", color: "from-purple-500 to-purple-600" },
+                    { title: "Video Tutorials", icon: <Play className="size-4" />, description: "Watch step-by-step guides", color: "from-green-500 to-green-600" },
+                    { title: "Legal Templates", icon: <FileText className="size-4" />, description: "Download document templates", color: "from-orange-500 to-orange-600" },
+                    { title: "Knowledge Base", icon: <Lightbulb className="size-4" />, description: "Search help articles", color: "from-pink-500 to-pink-600" },
+                    { title: "Contact Support", icon: <MessageSquare className="size-4" />, description: "Get 24/7 assistance", color: "from-cyan-500 to-cyan-600" },
                   ].map((resource, index) => (
-                    <Button key={`resource-${index}`} variant="ghost" className="w-full justify-start h-auto py-3">
+                    <Button key={`resource-${index}`} variant="ghost" className="w-full justify-start h-auto py-3 group hover:bg-muted/50">
                       <div className="flex items-center gap-3">
-                        <div className="flex items-center justify-center size-10 rounded-lg bg-muted">
+                        <div className={`flex items-center justify-center size-10 rounded-lg bg-gradient-to-br ${resource.color} text-white`}>
                           {resource.icon}
                         </div>
-                        <div className="text-left">
-                          <p className="text-sm font-medium">{resource.title}</p>
+                        <div className="text-left flex-1">
+                          <p className="text-sm font-medium group-hover:text-primary transition-colors">{resource.title}</p>
                           <p className="text-xs text-muted-foreground">{resource.description}</p>
                         </div>
-                        <ChevronRight className="ml-auto size-4 text-muted-foreground" />
+                        <ChevronRight className="size-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
                       </div>
                     </Button>
                   ))}
                 </div>
               </CardContent>
+              <CardFooter className="border-t pt-4">
+                <Button variant="outline" className="w-full gap-1">
+                  <Globe2 className="size-3" />
+                  Visit Help Center
+                </Button>
+              </CardFooter>
             </Card>
           </div>
 
